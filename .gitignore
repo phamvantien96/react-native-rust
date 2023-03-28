@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules
+
+# Bundler
+vendor/bundle
+
+# Android Studio/IntelliJ
+android/.gradle
+android/*/build
+
+# Pod
+ios/Pods
+ios/build
+ios/Podfile.lock
