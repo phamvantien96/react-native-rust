@@ -15,3 +15,12 @@ android/*/build
 ios/Pods
 ios/build
 ios/Podfile.lock
+
+# Rust
+target
+
+ios/Generated
+
+# Xcode
+xcuserdata
+xcshareddata
