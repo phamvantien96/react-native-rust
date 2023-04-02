@@ -102,6 +102,12 @@ android {
         versionName "1.0"
     }
 
+    sourceSets {
+        main {
+            java.srcDirs += ['src/generated']
+        }
+    }
+
     splits {
         abi {
             reset()
@@ -153,6 +159,8 @@ dependencies {
     implementation("com.facebook.react:react-android")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation 'com.google.protobuf:protobuf-java:3.22.2'
+    implementation 'com.google.protobuf:protobuf-java-util:3.22.2'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
