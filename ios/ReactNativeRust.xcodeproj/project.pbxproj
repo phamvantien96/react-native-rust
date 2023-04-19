@@ -17,6 +17,7 @@
 		7699B88040F8A987B510C191 /* libPods-ReactNativeRust-ReactNativeRustTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeRust-ReactNativeRustTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		841B236929D5F27600D6B954 /* librust_mod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 138F7C6629D5AEE6001F61B7 /* librust_mod.a */; };
+		84F5145329E45C03004C55CB /* math.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5145229E45C03004C55CB /* math.pb.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -29,10 +30,10 @@
 			);
 			isEditable = 1;
 			outputFiles = (
-				"$(SRCROOT)/Generated/$(INPUT_FILE_BASE)FFI.h",
-				"$(SRCROOT)/Generated/$(INPUT_FILE_BASE).swift",
+				"$(SRCROOT)/generated/$(INPUT_FILE_BASE)FFI.h",
+				"$(SRCROOT)/generated/$(INPUT_FILE_BASE).swift",
 			);
-			script = "# Generate swift bindings for the todolist rust library.\necho \"Generating files for $INPUT_FILE_PATH\"\ncargo run -p uniffi-bindgen-cli -- \\\n    generate \"$INPUT_FILE_PATH\" \\\n    --language swift \\\n    --out-dir \"$SRCROOT/Generated\"\necho \"Generated files for $INPUT_FILE_BASE in $SRCROOT/Generated\"\n";
+			script = "# Generate swift bindings for the todolist rust library.\necho \"Generating files for $INPUT_FILE_PATH\"\ncargo run -p uniffi-bindgen-cli -- \\\n    generate \"$INPUT_FILE_PATH\" \\\n    --language swift \\\n    --out-dir \"$SRCROOT/generated\"\necho \"Generated files for $INPUT_FILE_BASE in $SRCROOT/generated\"\n";
 		};
 /* End PBXBuildRule section */
 
@@ -66,6 +67,7 @@
 		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeRust-ReactNativeRustTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeRust-ReactNativeRustTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeRust-ReactNativeRustTests/Pods-ReactNativeRust-ReactNativeRustTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeRust.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeRust.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeRust/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84F5145229E45C03004C55CB /* math.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = math.pb.swift; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeRust-ReactNativeRustTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeRust-ReactNativeRustTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeRust-ReactNativeRustTests/Pods-ReactNativeRust-ReactNativeRustTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -108,13 +110,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13AFECD129D582E5008A9302 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Generated;
-			sourceTree = "<group>";
-		};
 		13B07FAE1A68108700A75B9A /* ReactNativeRust */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,11 +148,11 @@
 				138F7C6A29D5AFB3001F61B7 /* math.udl */,
 				13AFECD029D582D3008A9302 /* ReactNativeRust-Bridge-Header.h */,
 				13B07FAE1A68108700A75B9A /* ReactNativeRust */,
+				84F5145129E45C03004C55CB /* generated */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ReactNativeRustTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				13AFECD129D582E5008A9302 /* Generated */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 			);
 			indentWidth = 2;
@@ -172,6 +167,14 @@
 				00E356EE1AD99517003FC87E /* ReactNativeRustTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		84F5145129E45C03004C55CB /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				84F5145229E45C03004C55CB /* math.pb.swift */,
+			);
+			path = generated;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -473,6 +476,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13AFECD929D583C0008A9302 /* RustMod.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				84F5145329E45C03004C55CB /* math.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +554,7 @@
 				DEVELOPMENT_TEAM = Y748279QKU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ReactNativeRust/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -664,6 +669,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y748279QKU;
 				INFOPLIST_FILE = ReactNativeRust/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -10,14 +10,18 @@
     "test": "jest"
   },
   "dependencies": {
-    "@protobuf-ts/plugin": "^2.8.3",
+    "@bufbuild/connect": "^0.8.6",
+    "@bufbuild/protobuf": "^1.2.0",
     "react": "18.2.0",
-    "react-native": "0.71.4"
+    "react-native": "0.71.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@bufbuild/buf": "^1.15.0-1",
+    "@bufbuild/protoc-gen-connect-es": "^0.8.6",
+    "@bufbuild/protoc-gen-es": "^1.2.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.2.1",

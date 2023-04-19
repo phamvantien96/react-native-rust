@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
 package com.reactnativerust;
 
 option java_generic_services = true;
@@ -16,5 +15,4 @@ message AddResponse {
 
 service MathService {
   rpc Add(AddRequest) returns (AddResponse);
-  rpc Sub(google.protobuf.Empty) returns (google.protobuf.Empty);
 }

@@ -1,0 +1,15 @@
+version: v1
+plugins:
+  - plugin: es
+    out: src/generated
+  - plugin: connect-es
+    out: src/generated
+  - plugin: buf.build/bufbuild/connect-swift
+    opt: >
+      GenerateAsyncMethods=true,
+      GenerateCallbackMethods=true,
+      Visibility=Public
+    out: ios/generated
+  - plugin: buf.build/apple/swift
+    opt: Visibility=Public
+    out: ios/generated
