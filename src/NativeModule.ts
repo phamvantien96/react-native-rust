@@ -30,7 +30,8 @@ interface ChannelData {
 
 export const startChannel = () => {
     const server = new RNServer();
-    server.addService(createServiceImplSpec(MathService, mathService));
+    // server.addService(createServiceImplSpec(MathService, mathService));
+    RNChannel.call("uuid", "method", "request");
 }
 
 class RNServer {

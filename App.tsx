@@ -25,6 +25,7 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
+    console.log("startChannel");
     startChannel();
   }, []);
 

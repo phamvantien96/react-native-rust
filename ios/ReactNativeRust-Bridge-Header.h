@@ -7,5 +7,6 @@
 #define IOSApp_Bridging_Header_h
 
 #import "mathFFI.h"
+#import "RNChannel.h"
 
 #endif /* IOSApp_Bridging_Header_h */

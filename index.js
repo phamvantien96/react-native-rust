@@ -7,5 +7,5 @@ import App from './App';
 import {name as appName} from './app.json';
 import { startChannel } from './src/NativeModule';
 
-// AppRegistry.registerComponent(appName, () => App);
-startChannel();
+AppRegistry.registerComponent(appName, () => App);
+// startChannel();

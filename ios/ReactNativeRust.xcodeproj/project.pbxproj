@@ -17,7 +17,11 @@
 		7699B88040F8A987B510C191 /* libPods-ReactNativeRust-ReactNativeRustTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ReactNativeRust-ReactNativeRustTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		841B236929D5F27600D6B954 /* librust_mod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 138F7C6629D5AEE6001F61B7 /* librust_mod.a */; };
-		84F5145329E45C03004C55CB /* math.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5145229E45C03004C55CB /* math.pb.swift */; };
+		84F5145929EFE20B004C55CB /* RNChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5145829EFE20B004C55CB /* RNChannel.swift */; };
+		84F5145B29EFFB88004C55CB /* RNChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F5145A29EFFB88004C55CB /* RNChannel.m */; };
+		84F5146229F008A7004C55CB /* math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5145D29F008A7004C55CB /* math.swift */; };
+		84F5146329F008A7004C55CB /* math.connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5146029F008A7004C55CB /* math.connect.swift */; };
+		84F5146429F008A7004C55CB /* math.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5146129F008A7004C55CB /* math.pb.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -54,7 +58,7 @@
 		138F7C6629D5AEE6001F61B7 /* librust_mod.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librust_mod.a; path = "../target/aarch64-apple-ios/debug/librust_mod.a"; sourceTree = "<group>"; };
 		138F7C6A29D5AFB3001F61B7 /* math.udl */ = {isa = PBXFileReference; lastKnownFileType = text; name = math.udl; path = ../rust_mod/src/math.udl; sourceTree = "<group>"; };
 		13AFECD029D582D3008A9302 /* ReactNativeRust-Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ReactNativeRust-Bridge-Header.h"; sourceTree = "<group>"; };
-		13AFECD829D583C0008A9302 /* RustMod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RustMod.swift; sourceTree = "<group>"; };
+		13AFECD829D583C0008A9302 /* RustMod.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RustMod.swift; sourceTree = "<group>"; tabWidth = 4; };
 		13B07F961A680F5B00A75B9A /* ReactNativeRust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeRust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ReactNativeRust/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ReactNativeRust/AppDelegate.mm; sourceTree = "<group>"; };
@@ -67,7 +71,14 @@
 		5B7EB9410499542E8C5724F5 /* Pods-ReactNativeRust-ReactNativeRustTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeRust-ReactNativeRustTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeRust-ReactNativeRustTests/Pods-ReactNativeRust-ReactNativeRustTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ReactNativeRust.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeRust.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeRust/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		84F5145229E45C03004C55CB /* math.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = math.pb.swift; sourceTree = "<group>"; };
+		84F5145729EFE163004C55CB /* RNChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNChannel.h; path = ReactNativeRust/RNChannel.h; sourceTree = "<group>"; };
+		84F5145829EFE20B004C55CB /* RNChannel.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = RNChannel.swift; path = ReactNativeRust/RNChannel.swift; sourceTree = "<group>"; tabWidth = 4; };
+		84F5145A29EFFB88004C55CB /* RNChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNChannel.m; path = ReactNativeRust/RNChannel.m; sourceTree = "<group>"; };
+		84F5145D29F008A7004C55CB /* math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = math.swift; sourceTree = "<group>"; };
+		84F5145E29F008A7004C55CB /* mathFFI.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = mathFFI.modulemap; sourceTree = "<group>"; };
+		84F5145F29F008A7004C55CB /* mathFFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mathFFI.h; sourceTree = "<group>"; };
+		84F5146029F008A7004C55CB /* math.connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = math.connect.swift; sourceTree = "<group>"; };
+		84F5146129F008A7004C55CB /* math.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = math.pb.swift; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ReactNativeRust-ReactNativeRustTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeRust-ReactNativeRustTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeRust-ReactNativeRustTests/Pods-ReactNativeRust-ReactNativeRustTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -115,6 +126,9 @@
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				84F5145729EFE163004C55CB /* RNChannel.h */,
+				84F5145A29EFFB88004C55CB /* RNChannel.m */,
+				84F5145829EFE20B004C55CB /* RNChannel.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
@@ -148,7 +162,7 @@
 				138F7C6A29D5AFB3001F61B7 /* math.udl */,
 				13AFECD029D582D3008A9302 /* ReactNativeRust-Bridge-Header.h */,
 				13B07FAE1A68108700A75B9A /* ReactNativeRust */,
-				84F5145129E45C03004C55CB /* generated */,
+				84F5145C29F008A7004C55CB /* generated */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ReactNativeRustTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -169,10 +183,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84F5145129E45C03004C55CB /* generated */ = {
+		84F5145C29F008A7004C55CB /* generated */ = {
 			isa = PBXGroup;
 			children = (
-				84F5145229E45C03004C55CB /* math.pb.swift */,
+				84F5145D29F008A7004C55CB /* math.swift */,
+				84F5145E29F008A7004C55CB /* mathFFI.modulemap */,
+				84F5145F29F008A7004C55CB /* mathFFI.h */,
+				84F5146029F008A7004C55CB /* math.connect.swift */,
+				84F5146129F008A7004C55CB /* math.pb.swift */,
 			);
 			path = generated;
 			sourceTree = "<group>";
@@ -476,7 +494,11 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13AFECD929D583C0008A9302 /* RustMod.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				84F5145329E45C03004C55CB /* math.pb.swift in Sources */,
+				84F5145B29EFFB88004C55CB /* RNChannel.m in Sources */,
+				84F5146429F008A7004C55CB /* math.pb.swift in Sources */,
+				84F5145929EFE20B004C55CB /* RNChannel.swift in Sources */,
+				84F5146229F008A7004C55CB /* math.swift in Sources */,
+				84F5146329F008A7004C55CB /* math.connect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
