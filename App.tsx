@@ -25,8 +25,8 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
-    console.log("startChannel");
-    startChannel();
+    console.log("RNChannel: startChannel");
+    setTimeout(() => startChannel(), 6000)
   }, []);
 
   return (

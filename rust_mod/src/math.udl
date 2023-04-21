@@ -1,3 +1,0 @@
-namespace math {
-  u64 add(u64 a, u64 b);
-};

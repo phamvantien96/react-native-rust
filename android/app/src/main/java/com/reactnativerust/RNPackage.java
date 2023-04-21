@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RNPackage implements ReactPackage {
     static private RNChannel channel;
-    static private RNController controller;
+    static private RNController controller = new RNController();
 
     static public RNChannel getChannel() {
         return channel;

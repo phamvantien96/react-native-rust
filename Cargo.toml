@@ -2,4 +2,5 @@
 members = [
   "rust_mod",
   "uniffi-bindgen-cli",
+  "prost-rpc",
 ]

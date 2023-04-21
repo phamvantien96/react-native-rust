@@ -15,4 +15,5 @@ message AddResponse {
 
 service MathService {
   rpc Add(AddRequest) returns (AddResponse);
+  rpc Minus(AddRequest) returns (AddResponse);
 }

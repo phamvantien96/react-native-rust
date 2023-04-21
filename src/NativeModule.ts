@@ -1,4 +1,4 @@
-import { createServiceImplSpec, MethodImpl, ServiceImpl, ServiceImplSpec, StreamResponse, Transport, UnaryResponse } from '@bufbuild/connect';
+import { createServiceImplSpec, MethodImpl, ServiceImpl, ServiceImplSpec, StreamResponse, Transport, UnaryResponse, createPromiseClient } from '@bufbuild/connect';
 import { Message, AnyMessage, ServiceType, MethodInfo, PartialMessage } from '@bufbuild/protobuf';
 import {NativeEventEmitter, NativeModules} from 'react-native';
 import { AddRequest, AddResponse } from './generated/math_pb';
@@ -7,13 +7,24 @@ const {RNChannel} = NativeModules;
 const channel = new NativeEventEmitter(RNChannel);
 
 class RNTransport implements Transport {
-    unary<I extends Message<I> = AnyMessage, O extends Message<O> = AnyMessage>(service: ServiceType, method: MethodInfo<I, O>, signal: AbortSignal | undefined, timeoutMs: number | undefined, header: any, input: PartialMessage<I>): Promise<UnaryResponse<I, O>> {
-        throw new Error('Method not implemented.');
+    async unary<I extends Message<I> = AnyMessage, O extends Message<O> = AnyMessage>(service: ServiceType, method: MethodInfo<I, O>, signal: AbortSignal | undefined, timeoutMs: number | undefined, header: any, input: PartialMessage<I>): Promise<UnaryResponse<I, O>> {
+        const result = await RNChannel.unary(service.typeName, method.name, JSON.stringify(input));
+        return {
+            header: new Headers(),
+            trailer: new Headers(),
+            stream: false,
+            method: method,
+            service: service,
+            message: method.O.fromJsonString(result),
+        }
     }
     stream<I extends Message<I> = AnyMessage, O extends Message<O> = AnyMessage>(service: ServiceType, method: MethodInfo<I, O>, signal: AbortSignal | undefined, timeoutMs: number | undefined, header: any, input: AsyncIterable<I>): Promise<StreamResponse<I, O>> {
         throw new Error('Method not implemented.');
     }
 }
+
+const transport = new RNTransport();
+const client = createPromiseClient(MathService, transport);
 
 export const addMethod: MethodImpl<typeof MathService.methods.add> = async (request: AddRequest) => {
     return new AddResponse({result: 10});
@@ -28,10 +39,11 @@ interface ChannelData {
 	request: string,
 }
 
-export const startChannel = () => {
+export const startChannel = async () => {
     const server = new RNServer();
+    const response = await client.add({firstNumber: 2, secondNumber: 3});
+    console.log("MainActivity react result", response);
     // server.addService(createServiceImplSpec(MathService, mathService));
-    RNChannel.call("uuid", "method", "request");
 }
 
 class RNServer {

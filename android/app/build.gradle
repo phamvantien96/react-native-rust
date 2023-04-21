@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: "org.mozilla.rust-android-gradle.rust-android"
+apply plugin: 'kotlin-android'
 
 import com.android.build.OutputFile
 
@@ -154,6 +156,24 @@ android {
     }
 }
 
+cargo {
+    module  = "../../rust_mod"
+
+    // Because we use uniffi generate kotlin, the generate file load so have uniffi prefix.
+    // So here we use libname have uniffi prefix
+    libname = "uniffi_rust_mod"
+    targets = ["arm", "arm64", "x86", "x86_64"]
+
+    targetDirectory = "../../target"
+    prebuiltToolchains = true
+}
+
+tasks.whenTaskAdded { task ->
+    if ((task.name == 'javaPreCompileDebug' || task.name == 'javaPreCompileRelease')) {
+        task.dependsOn 'cargoBuild'
+    }
+}
+
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
@@ -161,6 +181,8 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation 'com.google.protobuf:protobuf-java:3.22.2'
     implementation 'com.google.protobuf:protobuf-java-util:3.22.2'
+    implementation "net.java.dev.jna:jna:5.7.0@aar"
+    implementation 'androidx.core:core-ktx:1.7.0'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
@@ -175,4 +197,5 @@ dependencies {
     }
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+apply plugin: 'org.jetbrains.kotlin.android'; applyNativeModulesAppBuildGradle(project)

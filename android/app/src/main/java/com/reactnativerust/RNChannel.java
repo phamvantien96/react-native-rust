@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -25,6 +26,7 @@ import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcChannel;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.DescriptorProtos;
+import com.google.protobuf.Service;
 import com.google.protobuf.util.JsonFormat;
 
 import java.io.ByteArrayInputStream;
@@ -41,6 +43,7 @@ import java.util.UUID;
 public class RNChannel extends ReactContextBaseJavaModule implements RpcChannel {
     private Map<UUID, RpcCallback> callbackMap = new HashMap<>();
     private Map<UUID, Message.Builder> responseBuilderMap = new HashMap<>();
+    private Map<String, Service> serviceMap = new HashMap<>();
     private static final String TAG = RNChannel.class.getSimpleName();
 
     public RNChannel(@Nullable ReactApplicationContext reactContext) {
@@ -62,12 +65,23 @@ public class RNChannel extends ReactContextBaseJavaModule implements RpcChannel 
             WritableMap   arg   = Arguments.createMap();
 
             arg.putString("uuid", uuid.toString());
-            arg.putString("request", JsonFormat.printer().print(request));
-            callbackMap.put(uuid, done);
-            responseBuilderMap.put(uuid, responsePrototype.newBuilderForType());
-            getReactApplicationContext()
-                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                    .emit(method.getFullName().toLowerCase(), arg);
+            // arg.putString("request", JsonFormat.printer().print(request));
+
+            String jsonRequest = JsonFormat.printer().print(request);
+            Log.d(TAG, "jsonRequest: " + jsonRequest);
+            Log.d(TAG, "service: " + method.getService().getFullName());
+            Log.d(TAG, "method: " + method.getName());
+            String jsonResponse = uniffi.rust_mod.Rust_modKt.unary(jsonRequest, method.getService().getFullName(), method.getName());
+            Log.d(TAG, "jsonResponse: " + jsonResponse);
+            Message.Builder builder = responsePrototype.newBuilderForType();
+            JsonFormat.parser().ignoringUnknownFields().merge(jsonResponse, builder);
+            done.run(builder.build());
+
+            // callbackMap.put(uuid, done);
+            // responseBuilderMap.put(uuid, responsePrototype.newBuilderForType());
+            // getReactApplicationContext()
+            //         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            //         .emit(method.getFullName().toLowerCase(), arg);
         } catch (IOException e) {
             Log.e(TAG, "error: ", e);
         };
@@ -75,7 +89,7 @@ public class RNChannel extends ReactContextBaseJavaModule implements RpcChannel 
     }
 
     @ReactMethod
-    public void response(String uuid, String response) {
+    public void response(String uuid, String response, Promise promise) {
         Log.d(TAG, "response: " + response);
         try {
             Message.Builder builder = responseBuilderMap.remove(UUID.fromString(uuid));
@@ -90,6 +104,38 @@ public class RNChannel extends ReactContextBaseJavaModule implements RpcChannel 
         } catch (IOException e) {
             Log.e(TAG, "error: ", e);
         };
+    }
+
+    @ReactMethod
+    public void unary(String serviceName, String methodName, String request, Promise promise) {
+        Log.d(TAG, "call: " + methodName + ", request = " + request);
+        Service service = serviceMap.get(serviceName);
+        if (service == null) {
+            promise.reject(new Exception("No service"));
+            return;
+        }
+
+        Descriptors.MethodDescriptor methodDescriptor = service.getDescriptorForType().findMethodByName(methodName);
+        Message.Builder builder = service.getRequestPrototype(methodDescriptor).newBuilderForType();
+        try {
+            JsonFormat.parser().ignoringUnknownFields().merge(request, builder);
+        } catch (InvalidProtocolBufferException e) {
+            throw new RuntimeException(e);
+        }
+        service.callMethod(methodDescriptor, RNPackage.getController(), builder.build(), new RpcCallback<Message>() {
+            @Override
+            public void run(Message parameter) {
+                try {
+                    promise.resolve(JsonFormat.printer().print(parameter));
+                } catch (InvalidProtocolBufferException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public void registerService(Service service) {
+        serviceMap.put(service.getDescriptorForType().getFullName(), service);
     }
 
     public static class EmptyRpcCallback implements RpcCallback<Empty> {

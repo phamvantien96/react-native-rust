@@ -11,5 +11,6 @@ npx buf generate proto/math.proto
 # protoc -I=proto --java_out=android/app/src/generated/java --swift_out=ios/generated --grpc-swift_out=ios/generated math.proto
 # npx protoc --ts_out src/generated --ts_opt server_generic --proto_path proto proto/math.proto
 
-# Rust generate swift using uniffi
-# cargo run -p uniffi-bindgen-cli generate ../rust_mod/src/math.udl --language swift --out-dir ./generated
+# Rust generate swift, kotlin using uniffi
+cargo run -p uniffi-bindgen-cli generate rust_mod/src/rust_mod.udl --language swift --out-dir ios/generated
+cargo run -p uniffi-bindgen-cli generate rust_mod/src/rust_mod.udl --language kotlin --out-dir android/app/src/generated/java

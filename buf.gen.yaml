@@ -10,3 +10,5 @@ plugins:
   - plugin: buf.build/apple/swift
     opt: Visibility=Public
     out: ios/generated
+  - plugin: buf.build/protocolbuffers/java
+    out: android/app/src/generated/java

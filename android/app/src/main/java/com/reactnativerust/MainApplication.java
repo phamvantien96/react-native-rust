@@ -60,6 +60,5 @@ public class MainApplication extends Application implements ReactApplication {
     }
     ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
     mReactNativeHost.getReactInstanceManager().createReactContextInBackground();
-    Log.d("MainActivity", "" + mReactNativeHost.getReactInstanceManager().getLifecycleState());
   }
 }
